@@ -1,4 +1,4 @@
-export enum SortFild {
+export enum SortField {
   name = 'name',
   sex = 'sex',
   born = 'born',

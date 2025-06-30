@@ -33,10 +33,23 @@ export const PeoplePage = () => {
       });
   }, [setPeople]);
 
-  const displayPeople = !loading && !error;
   const displayedPeople = useMemo(() => {
     return getFilteredPeople(people, searchParams);
   }, [people, searchParams]);
+
+  useEffect(() => {
+    if (!loading) {
+      if (displayedPeople.length === 0 && people.length > 0) {
+        setError(ErrorText.noSearchResult);
+      } else {
+        if (error === ErrorText.noSearchResult) {
+          setError('');
+        }
+      }
+    }
+  }, [displayedPeople, loading, people, error]);
+
+  const displayPeople = !loading && !error;
 
   return (
     <>

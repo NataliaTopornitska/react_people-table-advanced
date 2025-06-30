@@ -1,6 +1,6 @@
 import { Person } from '../../types';
 import { PersonItem } from './components/PersonItem';
-import { SortFild } from '../../types/SortField';
+import { SortField } from '../../types/SortField';
 import { SortItem } from './components/SortItem';
 
 type Props = {
@@ -15,7 +15,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {Object.values(SortFild).map(field => (
+          {Object.values(SortField).map(field => (
             <SortItem currentValue={field} key={field} />
           ))}
 

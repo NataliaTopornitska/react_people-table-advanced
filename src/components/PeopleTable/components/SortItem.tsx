@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
 import { SearchLink } from '../../SearchLink';
 import classNames from 'classnames';
-import { SortFild } from '../../../types/SortField';
+import { SortField } from '../../../types/SortField';
 
 type Props = {
-  currentValue: SortFild;
+  currentValue: SortField;
 };
 
 export const SortItem: React.FC<Props> = ({ currentValue: value }) => {

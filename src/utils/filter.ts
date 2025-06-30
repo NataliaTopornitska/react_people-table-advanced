@@ -43,7 +43,7 @@ export function getFilteredPeople(
 ): Person[] {
   let newPeople = [...people];
   const filterParams = Object.fromEntries(searchParams.entries());
-  const { query, gender, order } = filterParams;
+  const { query, sex, order } = filterParams;
   const centuries = searchParams.getAll('centuries');
   const sort = searchParams.get('sort') as keyof Person;
 
@@ -51,8 +51,8 @@ export function getFilteredPeople(
     newPeople = handleQueryChange(newPeople, query);
   }
 
-  if (gender) {
-    newPeople = newPeople.filter(person => person.sex === gender);
+  if (sex) {
+    newPeople = newPeople.filter(person => person.sex === sex);
   }
 
   if (centuries.length > 0) {

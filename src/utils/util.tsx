@@ -13,34 +13,31 @@ export const getTheParentName = (name: string | null) =>
   name && name.length > 0 ? name : '-';
 
 export const peopleWithParents = (people: Person[]): Person[] => {
-  return people.map((person, _index, men) => {
-    let newPerson = { ...person };
-    const mother = men.find(man => man.name === person.motherName) || null;
-    const father = men.find(man => man.name === person.fatherName) || null;
+  return people.map(person => {
+    const mother = people.find(man => man.name === person.motherName) || null;
+    const father = people.find(man => man.name === person.fatherName) || null;
 
-    if (mother) {
-      newPerson = { ...newPerson, mother };
-    }
-
-    if (father) {
-      newPerson = { ...newPerson, father };
-    }
-
-    return newPerson;
+    return {
+      ...person,
+      ...(mother && { mother }),
+      ...(father && { father }),
+    };
   });
 };
 
-export function debounce(
-  callback: (value: { query: string | null }) => void,
+export function debounce<T extends (...args: any[]) => void>(
+  callback: T,
   delay: number,
-) {
-  let timerId = 0;
+): (...args: Parameters<T>) => void {
+  let timerId: number | undefined;
 
-  return (value: { query: string | null }) => {
-    window.clearTimeout(timerId);
+  return (...args: Parameters<T>) => {
+    if (timerId) {
+      window.clearTimeout(timerId);
+    }
 
     timerId = window.setTimeout(() => {
-      callback(value);
+      callback(...args);
     }, delay);
   };
 }
